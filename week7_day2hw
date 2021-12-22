@@ -1,0 +1,150 @@
+//==========Exercise #1 ===========//
+/*
+Write a function that parses through the below object and displays all of their
+favorite food dishes as shown:
+*/
+
+let person3 = {
+  pizza: ["Deep Dish", "South Side Thin Crust"],
+  tacos: "Anything not from Taco bell",
+  burgers: "Portillos Burgers",
+  ice_cream: ["Chocolate", "Vanilla", "Oreo"],
+  shakes: [
+    {
+      oberwise: "Chocolate",
+      dunkin: "Vanilla",
+      culvers: "All of them",
+      mcDonalds: "Sham-rock-shake",
+      cupids_candies: "Chocolate Malt",
+    },
+  ],
+};
+
+/* 
+no idea how to display the key AND values for that nested object correctly. I tried many different ways to acces shakes but it didn't work so due to limited time
+I gave up to finish so I can finish hw in time. Just spending a lot of time and getting nowhere, any advice please advise. 
+*/
+const favDish = (dict) => {
+
+  for (let key in dict) {
+      if (typeof dict[key][0] === 'object') {
+          favDish(Object.values(dict[key][0]))
+        }else{
+          console.log(`My favorite kind of ${key} : ${dict[key]}.`);          
+    }
+  }
+};
+
+
+favDish(person3);
+
+//=======Exercise #2=========//
+/*
+Write an object prototype for a Person that has a name and age, has a
+printInfo method, and also has a method that 
+increments the persons age by 1 each time the method is called.
+Create two people using the 'new' keyword, and print 
+both of their infos and increment one persons
+age by 3 years. Use an arrow function for both methods
+*/
+
+// Create our Person Prototype
+
+// Use an arrow to create the printInfo method
+
+// Create another arrow function for the addAge method that takes a single parameter
+// Adding to the age
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+
+  this.printInfo = () => {
+    console.log(`${name}'s age is ${age}`);
+  };
+  this.addAge = () => {
+    age++;
+  };
+}
+
+let allan = new Person("allan", 99);
+let ariela = new Person("ariela", 1);
+
+allan.printInfo();
+ariela.printInfo();
+
+ariela.addAge();
+ariela.addAge();
+ariela.addAge();
+ariela.printInfo();
+
+// =============Exercise #3 ============//
+/*
+
+    Create a Promised based function that will check a string to determine if it's length is greater than 10.
+    If the length is greater than ten console log "Big word". 
+    If the length of the string is less than 10 console log "Small Number"
+*/
+
+const isWordBig = (word) => {
+  return new Promise((resolve, reject) => {
+    if (word.length > 10) {
+      console.log("Big word");
+      resolve("Impressive, that's pretty big");
+    } else {
+      console.log("Small word");
+      reject("Sorry, it's tiny!");
+    }
+  });
+};
+
+isWordBig("Supeeeeeeeeeeeeer!")
+  .then((result) => {
+    console.log(`Success :${result}`);
+  })
+
+  .catch((error) => {
+    console.log(`Error: ${error}`);
+  });
+
+// codewars problem 1
+/*
+Given a string of digits, you should replace any digit below 5 with '0' and any digit 5 and above with '1'. Return the resulting string.
+
+Note: input will never be an empty string
+*/
+
+function fakeBin(x) {
+  bin_str = "";
+  for (let i = 0; i < x.length; i++) {
+    if (x[i] < "5") {
+      bin_str += "0";
+    } else {
+      bin_str += "1";
+    }
+  }
+  return bin_str;
+}
+
+console.log(fakeBin("45385593107843568"));
+
+// codewars problem 2
+/*
+Create a function which answers the question "Are you playing banjo?".
+If your name starts with the letter "R" or lower case "r", you are playing banjo!
+
+The function takes a name as its only argument, and returns one of the following strings:
+
+name + " plays banjo" 
+name + " does not play banjo"
+*/
+
+function areYouPlayingBanjo(name) {
+  if (name[0].toLowerCase() == "r") {
+    return `${name} plays banjo`;
+  } else {
+    return `${name} does not play banjo`;
+  }
+}
+
+console.log(areYouPlayingBanjo("Ringo"));
